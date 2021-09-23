@@ -113,6 +113,16 @@ body, .app {
   outline: none;
 }
 
+.rating {
+  display: flex
+}
+
+.rating .star {
+  width: 24px;
+  height: 24px;
+  background-image: url('./icons/star.svg');
+}
+
 button:active {
   border: red;
   outline: none;
