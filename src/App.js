@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 
 class BooksApp extends React.Component {
   state = {
+    currentBooks: [],
     shelves: []
   }
 
@@ -33,6 +34,7 @@ class BooksApp extends React.Component {
       books: books.filter((book) => book.shelf === 'read')
     }
     this.setState((currentState) => ({
+      currentBooks: books,
       shelves: [shelfReading, shelfWantToRead, shelfRead]
     }))
   }
@@ -52,23 +54,17 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route 
-          path="/search" 
-          render={() => (
-            <SearchBooks 
+        <Route path="/search" >
+          <SearchBooks 
+              currentBooks={this.state.currentBooks}
               onShelfChange={this.handleShelfChange} 
-            />
-          )} 
-        />
-        <Route 
-          exact 
-          path="/" 
-          render={() => (
-            <ListBooks 
-              onShelfChange={this.handleShelfChange} shelves={this.state.shelves} 
-            />
-          )} 
-        />
+          />
+        </Route>
+        <Route exact path="/">
+          <ListBooks 
+            onShelfChange={this.handleShelfChange} shelves={this.state.shelves} 
+          />
+        </Route>
       </div>
     )
   }
